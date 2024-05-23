@@ -2,26 +2,35 @@ import cv2 as cv
 import numpy as np
 
 
-def display_image(title: str, image):
+def display_image(title: str, image, option: int = 0):
     """
-    display image
+    display and save image
 
     :param title: displayed window title
     :param image: image to be displayed
+    :param option: switch to save image (0 - off, 1 - on)
     :return:
     """
     cv.imshow(title, image)
     cv.waitKey(0)
+    if option:
+        cv.imwrite(f'transformed_images/{title}.jpg', image)
 
 
 # loading grayscale image
 src_img = cv.imread('source_images/Ian_Berry_A young_Russian soldier.Jpeg', 0)
 assert src_img is not None, "File could not be read"
 # display_image('Original image', src_img)
-
+result = np.copy(src_img)
 disk = cv.getStructuringElement(cv.MORPH_ELLIPSE, (3, 3))
-disk2 = cv.getStructuringElement(cv.MORPH_ELLIPSE, (3, 3))
-ret, bin_image = cv.threshold(src_img[0:735, 200:1080], 180, 255, cv.THRESH_BINARY)
-erosion = cv.erode(cv.erode(bin_image, disk, iterations=8), disk2, iterations=4)
+bin_image = src_img[0:735, 200:1080]
+erosion = cv.erode(bin_image, disk, iterations=1)
+display_image('Erosed_1', erosion, 1)
+dilation = cv.dilate(erosion, disk, iterations=7)
+display_image('Dilation_7', dilation, 1)
+erosion2 = cv.erode(dilation, disk, iterations=5)
+display_image('Erosed_2_5', erosion2, 1)
+result[0:735, 200:1080] = erosion2
+display_image('Result', result, 1)
+# display_image('Erosion', erosion)
 
-display_image('Erosion', erosion)
