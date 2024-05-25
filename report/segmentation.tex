@@ -1,0 +1,76 @@
+\subsection{Исходное изображение}
+
+Для последнего задания выберем следующее изображение:
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/source_images/snooker.jpg}
+    \caption{Шары для игры в бильярд}
+    \label{img:billiard_balls}
+\end{figure} 
+
+\subsection{Программа на языке Python}
+\input{code_segmentation.tex}
+
+\subsection{Результат}
+
+Для начала необходимо получить бинарное изображение, предварительно удалив лишние детали.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/transformed_images/3/Binary_closed.jpg}
+    \caption{Бинарное изображение}
+    \label{img:bin_balls}
+\end{figure} 
+
+Далее воспользуемся преобразованием евклидова расстояния и после дополнительной фильтрации получим маркеры переднего плана:
+
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/transformed_images/3/Fg.jpg}
+        \caption{}
+        \label{img:bin_fg}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/transformed_images/3/Jet_fg_markers.jpg}
+        \caption{}
+        \label{img:jet_fg}
+    \end{subfigure}
+    \caption{Определение маркеров переднего плана: (a) область маркеров переднего плана, (b) маркеры переднего плана}
+    \label{img:FG}
+\end{figure} 
+
+Далее получим маркеры фона и неопределенной области:
+
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/transformed_images/3/Bg.jpg}
+        \caption{}
+        \label{img:bin_bg}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/transformed_images/3/UND.jpg}
+        \caption{}
+        \label{img:bin_und}
+    \end{subfigure}
+    \caption{Определение маркеров: (a) фона, (b) неопределенной области}
+    \label{img:BG}
+\end{figure} 
+
+Наконец, получим результаты сегментации:
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/transformed_images/3/Jet.jpg}
+    \caption{Результат сегментации}
+    \label{img:seg}
+\end{figure} 
+\clearpage
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/transformed_images/3/result.jpg}
+    \caption{Результат сегментации, наложенный на исходное изображение}
+    \label{img:seg_orig}
+\end{figure} 
