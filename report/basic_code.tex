@@ -1,3 +1,4 @@
+\begin{lstlisting}[caption={Исходный код функции для минимизации дефектов надписи }, label={lst:line_compute}]
 import cv2 as cv
 import numpy as np
 
@@ -31,6 +32,5 @@ dilation = cv.dilate(erosion, disk, iterations=7)
 erosion2 = cv.erode(dilation, disk, iterations=5)
 # displaying transformed image
 result[0:735, 200:1080] = erosion2
-# display_image('Result', result, 1)
-
-
+display_image('Result', result, 1)
+        \end{lstlisting}

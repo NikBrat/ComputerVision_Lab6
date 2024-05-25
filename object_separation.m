@@ -1,4 +1,4 @@
-src_img = imread("Circles_3.png");
+src_img = imread("circles.jpg");
 gray_img = im2gray(src_img);
 BW = imbinarize(gray_img);
 BW = ~BW;
